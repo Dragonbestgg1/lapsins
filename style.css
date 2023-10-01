@@ -31,22 +31,24 @@ body{
     flex-direction: row;
     border-width: 2px;
     border-style: solid;
-    border-image: linear-gradient(to bottom right, pink, white) 1;
+    background: linear-gradient(to bottom, crimson, purple);
+    border-radius: 30px;
 }
-.redirects-single{
+.redirects-single {
     display: flex;
     flex-wrap: wrap;
-    height: 3%;
-    width: 7%;
     align-content: center;
-    justify-content: space-evenly;
+    justify-content: center;
     margin: 0;
+    height: 3%;
+    width: 8%;
     align-items: center;
     flex-direction: row;
     border-width: 2px;
     border-style: solid;
-    border-image: linear-gradient(to bottom right, pink, white) 1;
     margin-bottom: 15px;
+    background: linear-gradient(to bottom, crimson, purple);
+    border-radius: 30px;
 }
 .uzdevumi{
     display: flex;
@@ -54,6 +56,24 @@ body{
     flex-direction: row;
     height: 100%;
     width: 100%;
+    gap: 20px;
+}
+.boxing{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    flex-wrap: wrap;
+    width: 20%;
+    height: 40%;
+    align-items: center;
+    align-content: space-evenly;
+    justify-content: flex-start;
+    background: linear-gradient(to bottom, blue, darkorange);
+    border-width: 2px;
+    border-style: solid;
+    border-image: linear-gradient(to top left, pink, purple) 1;
+    gap: 190px;
+    box-shadow: 5px 0px 10px black;
 }
 .izveidot{
     display: flex;
@@ -104,7 +124,6 @@ label{
     /* Mask the color to the text, and remove the rest */
     -webkit-background-clip: text;
     
-    /* Make the text fill color value transparent so the masked background color comes through */
     -webkit-text-fill-color: transparent;
 }
 .submit{
@@ -114,10 +133,9 @@ label{
     /* Mask the color to the text, and remove the rest */
     -webkit-background-clip: text;
     
-    /* Make the text fill color value transparent so the masked background color comes through */
     -webkit-text-fill-color: transparent;
     
-    /* Transition for a smooth color change on hover */
+    
     transition: background-color 0.3s;
 }
 .submit:hover {
@@ -125,10 +143,10 @@ label{
         /* Mask the color to the text, and remove the rest */
         -webkit-background-clip: text;
     
-        /* Make the text fill color value transparent so the masked background color comes through */
+
         -webkit-text-fill-color: transparent;
         
-        /* Transition for a smooth color change on hover */
+        
         transition: background-color 0.3s;
 }
 .area{
@@ -139,40 +157,54 @@ label{
     color: white;
 }
 .text-gradient {
-    /* Set the background color */
-    background: linear-gradient(to right, #ffffff, #ffa3c2);
+    background: linear-gradient(to right, white, #ffa3c2);
     
     /* Mask the color to the text, and remove the rest */
     -webkit-background-clip: text;
     
-    /* Make the text fill color value transparent so the masked background color comes through */
     -webkit-text-fill-color: transparent;
     
-    /* Transition for a smooth color change on hover */
+    
     transition: background-color 0.3s;
 }
 
 /* Change the background color on hover */
 .text-gradient:hover {
     background: linear-gradient(to right, red, yellow); /* Change the gradient colors or properties */
-        /* Mask the color to the text, and remove the rest */
-        -webkit-background-clip: text;
+    /* Mask the color to the text, and remove the rest */
+    -webkit-background-clip: text;
     
-        /* Make the text fill color value transparent so the masked background color comes through */
-        -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;
         
-        /* Transition for a smooth color change on hover */
-        transition: background-color 0.3s;
+    
+    transition: background-color 0.3s;
 }
-
-h1 {
-    /* Set the background color */
+.task {
+    font-size: x-large;
+    font-weight: bold;
     background: linear-gradient(to right, #ffffff, #ffa3c2);
     
     /* Mask the color to the text, and remove the rest */
     -webkit-background-clip: text;
     
-    /* Make the text fill color value transparent so the masked background color comes through */
+    -webkit-text-fill-color: transparent;
+}
+.desc{
+    font-size: larger;
+    font-weight: bold;
+    background: linear-gradient(to right, #ffffff, #ffa3c2);
+    
+    /* Mask the color to the text, and remove the rest */
+    -webkit-background-clip: text;
+    
+    -webkit-text-fill-color: transparent;
+}
+h1 {
+    background: linear-gradient(to right, #ffffff, #ffa3c2);
+    
+    /* Mask the color to the text, and remove the rest */
+    -webkit-background-clip: text;
+    
     -webkit-text-fill-color: transparent;
 }
 /* Customize scrollbar in Webkit browsers */

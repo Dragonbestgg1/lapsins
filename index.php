@@ -1,5 +1,7 @@
 <?php
 include "db.php";
+$db = new db;
+$result = $db->selectAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +19,18 @@ include "db.php";
     <h1>Uzdevumi</h1>
     <div class="uzdevumi">
         <?php
-            // foreach
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo"
+                        <div class='boxing'>
+                            <div class='task'>" . $row["title"] . "</div>
+                            <div class='desc'>".$row["description"] ."</div>
+                        </div>
+                    ";
+                }
+            } else {
+                echo "No tasks found.";
+            }
         ?>
     </div>
 </body>

@@ -27,7 +27,7 @@
             <button type="submit" class="submit">Submit</button>
         </form>
     </div>
-    <?php include "insert.php"?>
     <script src="script.js"></script>
+    <?php include "insert.php"?>
 </body>
 </html>

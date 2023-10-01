@@ -18,15 +18,6 @@ class db{
             die("Savienojums Neizdevās: " . $this->conn->connect_error);
         }
     }
-    function select($data)
-    {
-        $vertiba = $this->conn->query($data);
-        if ($vertiba->num_rows > 0) {
-            return $vertiba;
-        } else {
-            return $this->conn->error;
-        }
-    }
     function insert($data)
     {
         if ($this->conn->query($data) === TRUE) {
@@ -34,6 +25,11 @@ class db{
         } else {
             return $this->conn->error;
         }
+    }
+    function selectAll(){
+        $sql="SELECT * FROM tasks ORDER BY id ASC;";
+        $result=$this->conn->query($sql);
+        return $result;
     }
     function query($sql, $params = []) {
         $stmt = $this->conn->prepare($sql);
