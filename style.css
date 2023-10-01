@@ -1,0 +1,195 @@
+html{
+    display: flex;
+    margin: 0;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    background: linear-gradient(blue, red);
+    background-attachment: fixed;
+    font-family: monospace;
+    overflow-x: hidden;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+}
+.redirects{
+    display: flex;
+    flex-wrap: wrap;
+    height: 7%;
+    width: 14%;
+    align-content: center;
+    justify-content: space-evenly;
+    margin: 0;
+    align-items: center;
+    flex-direction: row;
+    border-width: 2px;
+    border-style: solid;
+    border-image: linear-gradient(to bottom right, pink, white) 1;
+}
+.redirects-single{
+    display: flex;
+    flex-wrap: wrap;
+    height: 3%;
+    width: 7%;
+    align-content: center;
+    justify-content: space-evenly;
+    margin: 0;
+    align-items: center;
+    flex-direction: row;
+    border-width: 2px;
+    border-style: solid;
+    border-image: linear-gradient(to bottom right, pink, white) 1;
+    margin-bottom: 15px;
+}
+.uzdevumi{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+.izveidot{
+    display: flex;
+    flex-direction: column;
+}
+.input{
+    border-width: 2px;
+    border-style: solid;
+    border-image: linear-gradient(to bottom right, pink, white) 1;
+    background: none;
+}
+button{
+    background: none;
+    border: none;
+    font-family: inherit;
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+    margin: 0;
+}
+.col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    font-family: inherit;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 30px;
+}
+input{
+    color: white;
+}
+label{
+    font-family: inherit;
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #ffffff, #ffa3c2);
+    
+    /* Mask the color to the text, and remove the rest */
+    -webkit-background-clip: text;
+    
+    /* Make the text fill color value transparent so the masked background color comes through */
+    -webkit-text-fill-color: transparent;
+}
+.submit{
+    margin: 20px;
+    background: linear-gradient(to right, #ffffff, #ffa3c2);
+    
+    /* Mask the color to the text, and remove the rest */
+    -webkit-background-clip: text;
+    
+    /* Make the text fill color value transparent so the masked background color comes through */
+    -webkit-text-fill-color: transparent;
+    
+    /* Transition for a smooth color change on hover */
+    transition: background-color 0.3s;
+}
+.submit:hover {
+    background: linear-gradient(to right, red, yellow); /* Change the gradient colors or properties */
+        /* Mask the color to the text, and remove the rest */
+        -webkit-background-clip: text;
+    
+        /* Make the text fill color value transparent so the masked background color comes through */
+        -webkit-text-fill-color: transparent;
+        
+        /* Transition for a smooth color change on hover */
+        transition: background-color 0.3s;
+}
+.area{
+    border-width: 2px;
+    border-style: solid;
+    border-image: linear-gradient(to bottom right, pink, white) 1;
+    background: none;
+    color: white;
+}
+.text-gradient {
+    /* Set the background color */
+    background: linear-gradient(to right, #ffffff, #ffa3c2);
+    
+    /* Mask the color to the text, and remove the rest */
+    -webkit-background-clip: text;
+    
+    /* Make the text fill color value transparent so the masked background color comes through */
+    -webkit-text-fill-color: transparent;
+    
+    /* Transition for a smooth color change on hover */
+    transition: background-color 0.3s;
+}
+
+/* Change the background color on hover */
+.text-gradient:hover {
+    background: linear-gradient(to right, red, yellow); /* Change the gradient colors or properties */
+        /* Mask the color to the text, and remove the rest */
+        -webkit-background-clip: text;
+    
+        /* Make the text fill color value transparent so the masked background color comes through */
+        -webkit-text-fill-color: transparent;
+        
+        /* Transition for a smooth color change on hover */
+        transition: background-color 0.3s;
+}
+
+h1 {
+    /* Set the background color */
+    background: linear-gradient(to right, #ffffff, #ffa3c2);
+    
+    /* Mask the color to the text, and remove the rest */
+    -webkit-background-clip: text;
+    
+    /* Make the text fill color value transparent so the masked background color comes through */
+    -webkit-text-fill-color: transparent;
+}
+/* Customize scrollbar in Webkit browsers */
+::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: linear-gradient(red, blue); /* Track color */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(blue, red); /* Thumb color */
+    border-radius: 3px; /* Rounded corners for the thumb */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom ,#ffffff, #ffa3c2); /* Thumb color on hover */
+  }
+  
