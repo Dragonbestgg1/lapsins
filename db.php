@@ -33,24 +33,62 @@ class db{
     }
     function query($sql, $params = []) {
         $stmt = $this->conn->prepare($sql);
-        
+    
         if ($stmt === false) {
-            die("Error preparing statement: " . $this->conn->error);
+            return ["success" => false, "message" => "Error preparing statement: " . $this->conn->error];
         }
-        
+    
         if (!empty($params)) {
-            // Dynamically bind parameters
-            $types = str_repeat("s", count($params)); // Assuming all parameters are strings
+            // Dynamically bind parameters with appropriate data types
+            $types = "";
+            foreach ($params as $param) {
+                if (is_int($param)) {
+                    $types .= "i"; // Integer
+                } elseif (is_double($param)) {
+                    $types .= "d"; // Double (float)
+                } elseif (is_string($param)) {
+                    $types .= "s"; // String
+                } else {
+                    $types .= "s"; // Default to string
+                }
+            }
             $stmt->bind_param($types, ...$params);
         }
-        
+    
         if ($stmt->execute() === false) {
-            die("Error executing statement: " . $stmt->error);
+            return ["success" => false, "message" => "Error executing statement: " . $stmt->error];
         }
-        
+    
         $result = $stmt->get_result();
-        return $result;
-        
+        return ["success" => true, "result" => $result];
     }
+    
+    function delete($id) {
+        $sql = "DELETE FROM tasks WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function selectWhereID($id) {
+        $sql = "SELECT * FROM tasks WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $id); // Assuming 'id' is an integer, use "i" for integers, "s" for strings, etc.
+    
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            $stmt->close();
+            return $result;
+        } else {
+            // Handle the query execution error here
+            return 'gejs';
+        }
+    }
+    
 }
 ?>
