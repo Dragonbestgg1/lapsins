@@ -25,7 +25,10 @@ $result = $db->selectAll();
                 while ($row = $result->fetch_assoc()) {
                     echo"
                         <div class='boxing task-id-". $row["id"] ."'>
-                            <div class='task'>" . $row["title"] . "</div>
+                            <div class='col-title'>
+                                <div class='task'>" . $row["title"] . "</div>
+                                <h9>".$row['id']."</h9>
+                            </div>
                             <div class='desc'>".$row["description"] ."</div>
                             <div class='delete-button'>
                                 <div class='stat'>".$row["status"]."</div>

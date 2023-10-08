@@ -103,6 +103,12 @@ body{
     align-items: center;
     justify-content: center;
 }
+.col-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .input{
     border-width: 2px;
     border-style: solid;
@@ -294,6 +300,14 @@ h1 {
     -webkit-text-fill-color: transparent;
 }
 h3 {
+    background: linear-gradient(to right, #ffffff, #ffa3c2);
+    
+    /* Mask the color to the text, and remove the rest */
+    -webkit-background-clip: text;
+    
+    -webkit-text-fill-color: transparent;
+}
+h9 {
     background: linear-gradient(to right, #ffffff, #ffa3c2);
     
     /* Mask the color to the text, and remove the rest */

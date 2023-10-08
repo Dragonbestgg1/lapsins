@@ -98,21 +98,21 @@ function deleteTask(taskId) {
     });
 }
 // Place the JavaScript code in your script.js file
-
 // Function to extract the task ID from the task container
 function extractTaskID(taskContainer) {
-    // You should customize this function based on your HTML structure and data
-    // For example, if the task ID is stored as a data attribute on the container:
+    // Assuming the task ID is stored as a data attribute named "data-task-id" on the taskContainer
     const taskId = taskContainer.getAttribute('data-task-id');
     return taskId;
 }
 
-// Function to update a task based on its ID
-function updateTask(taskID) {
-    // Get the updated task details from the user (modify as needed)
-    const updatedTitle = document.getElementById('updated-title').value;
-    const updatedDescription = document.getElementById('updated-description').value;
+// Function to make an element editable
+function makeEditable(element) {
+    element.contentEditable = true;
+    element.focus();
+}
 
+// Function to update a task based on its ID
+function updateTask(taskID, updatedTitle, updatedDescription) {
     // Create an object with the updated task data
     const updatedTaskData = {
         task_id: taskID,
@@ -143,8 +143,67 @@ function updateTask(taskID) {
     });
 }
 
+// Function to handle the "Edit" button click
+function handleEditButtonClick(button) {
+    // Find the parent task container
+    const taskContainer = button.closest('.boxing-single');
 
-// Function to get task by ID (modified to include the update button)
+    // Make the title and description editable
+    makeEditable(taskContainer.querySelector('.task-title'));
+    makeEditable(taskContainer.querySelector('.task-description'));
+
+    // Change the "Edit" button to a "Save" button
+    button.textContent = 'Save';
+    button.classList.remove('update-button');
+    button.classList.add('save-button');
+
+    // Attach the event listener to handle saving
+    button.addEventListener('click', () => {
+        // Find the parent task container
+        const taskContainer = button.closest('.boxing-single');
+        // Extract the task ID from the task container
+        const taskID = parseInt(taskContainer.getAttribute('data-task-id')); // Convert to integer
+
+        // Extract the updated title and description from the elements
+        const updatedTitle = taskContainer.querySelector('.task-title').textContent;
+        const updatedDescription = taskContainer.querySelector('.task-description').textContent;
+
+        // Call the updateTask function with the task ID and updated data
+        updateTask(taskID, updatedTitle, updatedDescription);
+
+        // Change the "Save" button back to an "Edit" button
+        button.textContent = 'Edit';
+        button.classList.remove('save-button');
+        button.classList.add('update-button');
+        // Remove the save click event listener to avoid conflicts
+        button.removeEventListener('click', handleEditButtonClick);
+    });
+}
+
+// Event listener for the Edit button
+// Event listener for the Edit button
+document.getElementById('edit').addEventListener('click', function () {
+    // Select the task container by its data attribute
+    const taskContainer = document.querySelector('.boxing-single');
+
+    if (taskContainer) {
+        // Find the elements inside the task container using their classes
+        const titleElement = taskContainer.querySelector('.task-title');
+        const descriptionElement = taskContainer.querySelector('.task-description');
+
+        makeEditable(titleElement); // Make the h1 element editable
+        makeEditable(descriptionElement); // Make the h3 element editable
+
+        // Add the "editable" class to both elements
+        titleElement.classList.add('editable');
+        descriptionElement.classList.add('editable-h');
+    } else {
+        alert('No task container found. Make sure you have loaded a task first.');
+    }
+});
+
+
+// Function to get tasks by ID
 function getTaskByID() {
     let element = document.querySelector(".input");
     let resultContainer = document.getElementById("result-container");
@@ -154,7 +213,7 @@ function getTaskByID() {
         fetch(`get.php?id=${id}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             }
         })
         .then(response => {
@@ -168,45 +227,39 @@ function getTaskByID() {
             // Handle the data returned from the server
             // console.log(data);
             resultContainer.innerHTML = ''; // Clear previous content
-            if (data.length == 1) {
-                // Loop through the data and display it
-                data.forEach((task) => {
-                    const title = task[1]; // Assuming the title is the first item in each JSON object
-                    const description = task[2]; // Assuming the description is the second item in each JSON object
-                    const status = task[4];
-                
-                    // Display the data in the resultContainer
-                    const taskContainer = document.createElement('div');
-                    taskContainer.classList.add('boxing-single');
-                    taskContainer.setAttribute('data-task-id', task[0]); // Assuming task[0] contains the task ID
+            if (data.length === 1) {
+                const task = data[0]; // Access the first row in the response
 
-                    taskContainer.innerHTML = `
-                        <h1>${title}</h1>
-                        <div class="col-single">
-                            <h3>${description}</h3>
-                            <div class="delete-button-single">
-                                <p>${status}</p>
-                                <button class="update-button" id="edit">Edit</button>
-                            </div>
+                // Access values using array indices
+                const title = task[1]; // Assuming the title is at index 1
+                const description = task[2]; // Assuming the description is at index 2
+                const status = task[4]; // Assuming the status is at index 4
+                const taskID = parseInt(task[0]); // Convert to integer if task_id is a numeric ID at index 0
+
+                // Display the data in the resultContainer
+                const taskContainer = document.createElement('div');
+                taskContainer.classList.add('boxing-single');
+                taskContainer.setAttribute('data-task-id', taskID);
+
+                taskContainer.innerHTML = `
+                    <h1 id="task-title">${title}</h1>
+                    <div class="col-single">
+                        <h3 id="task-description">${description}</h3>
+                        <div class="delete-button-single">
+                            <p>${status}</p>
+                            <button id="edit" class="update-button">Edit</button>
                         </div>
-                    `;
-                    // Append the task container to the resultContainer
-                    resultContainer.appendChild(taskContainer);
+                    </div>
+                `;
+
+                // Append the task container to the resultContainer
+                resultContainer.appendChild(taskContainer);
+
+                // Add event listener to the "Edit" button
+                const editButton = taskContainer.querySelector('.update-button');
+                editButton.addEventListener('click', () => {
+                    handleEditButtonClick(editButton);
                 });
-                
-                // Add event listeners to the "Update" buttons
-                const updateButtons = document.querySelectorAll('.update-button');
-                updateButtons.forEach((button) => {
-                    button.addEventListener('click', () => {
-                        // Find the parent task container
-                        const taskContainer = button.closest('.boxing-single');
-                        // Extract the task ID from the task container
-                        const taskID = extractTaskID(taskContainer);
-                        // Call the updateTask function with the task ID
-                        updateTask(taskID);
-                    });
-                });
-                
             } else {
                 resultContainer.innerHTML = '<p>No tasks found.</p>';
             }
@@ -219,3 +272,6 @@ function getTaskByID() {
         alert("Element with class 'input' not found.");
     }
 }
+
+// Call the getTaskByID function to retrieve and display tasks
+getTaskByID();
